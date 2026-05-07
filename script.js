@@ -121,7 +121,7 @@ async function finishGame() {
 
     if (player) {
         try {
-            const response = await fetch("/api/SalvarRanking", {
+            const response = await fetch("/api/SaveScore", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
