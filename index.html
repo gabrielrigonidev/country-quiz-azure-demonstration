@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Country Quiz 🌍</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Country Quiz 🌍</h1>
+        <p class="subtitle">Adivinhe o país pela bandeira</p>
+        <div id="quiz"> <img id="flag" src="" alt="Bandeira">
+            <div id="options"></div>
+            <p id="round"></p>
+            <p id="score"></p>
+        </div>
+        <div id="result" class="hidden">
+            <h2>Fim de jogo 🎉</h2>
+            <p id="final-score"></p>
+            <div id="ranking"></div> <button onclick="restartGame()">Jogar novamente</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
