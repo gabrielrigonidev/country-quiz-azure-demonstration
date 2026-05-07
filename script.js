@@ -120,16 +120,24 @@ async function finishGame() {
     const player = prompt("Digite seu nome:");
 
     if (player) {
-        await fetch("/api/SaveScore", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: player,
-                score: score
-            })
-        });
+        try {
+            const response = await fetch("/api/SalvarRanking", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: player,
+                    score: score
+                })
+            });
+            if (!response.ok) {
+                throw new Error("Erro ao salvar ranking");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao salvar ranking.");
+        }
     }
 
     loadRanking();
@@ -144,6 +152,10 @@ async function loadRanking() {
         await response.json();
 
     let html = "<h3>🏆 Ranking</h3>";
+
+    if (ranking.length === 0) {
+        html += "<p>Nenhuma pontuação ainda.</p>";
+    }
 
     ranking.forEach((item, index) => {
         html += `<p>${index + 1}. ${item.name} - ${item.score}</p>`;
