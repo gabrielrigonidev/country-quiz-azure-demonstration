@@ -1,13 +1,6 @@
-const appInsights = require("applicationinsights");
-if (process.env.APPLICATIONINSIGHTS_CONNECTION_STRING) {
-    appInsights.setup().start();
-}
-
 const { TableClient } = require("@azure/data-tables");
 
 module.exports = async function (context) {
-
-    const aiClient = appInsights.defaultClient;
 
     try {
 
@@ -34,16 +27,12 @@ module.exports = async function (context) {
 
         players.sort((a, b) => b.score - a.score);
 
-        if (aiClient) aiClient.trackEvent({ name: "GetRanking_Called" });
-
         context.res = {
             status: 200,
             body: players.slice(0, 10)
         };
 
     } catch (error) {
-
-        if (aiClient) aiClient.trackException({ exception: error });
 
         context.res = {
             status: 500,
