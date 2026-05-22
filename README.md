@@ -1,2 +1,1 @@
-teste1
-force redeploy 2
+teste
